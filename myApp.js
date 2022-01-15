@@ -15,13 +15,11 @@ app.get('/', (req, res) => {
   res.sendFile(absolutePath);
 });
 
-console.log(process.env.MESSAGE_STYLE);
-
 app.get('/json', (req, res) => {
   const text = 'Hello json';
   res.json({
     message: `${
-      process.env.MESSAGE_STYLE == uppercase ? text.toUpperCase() : text
+      process.env.MESSAGE_STYLE === 'uppercase' ? text.toUpperCase() : text
     }`,
   });
 });
