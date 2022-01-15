@@ -14,11 +14,13 @@ var app = express();
 //   absolutePath = __dirname + '/views/index.html';
 //   return res.sendFile(absolutePath);
 // });
-
+console.log(process.env.MESSAGE_STYLE)
 app.get('/json', (req, res) => {
-  process.env.MESSAGE_STYLE === 'uppercase'
-    ? res.json({ message: 'HELLO JSON' })
-    : res.json({ message: 'Hello json' });
+  if (process.env.MESSAGE_STYLE === 'uppercase') {
+    return res.json({ message: 'HELLO JSON' });
+  } else {
+    return res.json({ message: 'Hello json' });
+  }
 });
 
 module.exports = app;
