@@ -12,12 +12,12 @@ console.log('Hello World');
 
 app.get('/', (req, res) => {
   absolutePath = __dirname + '/views/index.html';
-  res.sendFile(absolutePath);
+  return res.sendFile(absolutePath);
 });
 
 app.get('/json', (req, res) => {
   const text = 'Hello json';
-  res.json({
+  return res.json({
     message: `${process.env.MESSAGE_STYLE === 'uppercase' ? text.toUpperCase() : text}`,
   });
 });
