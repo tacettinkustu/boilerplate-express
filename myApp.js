@@ -1,12 +1,12 @@
 var express = require('express');
 var app = express();
 
-
-app.use(function (req, res, next) {
-    const staticFilesPath = __dirname + '/public';
-    express.static(staticFilesPath)
-    next();
-});
+const middlewareFunc = (req, res, next) => {
+  const staticFilesPath = __dirname + '/public';
+  express.static(staticFilesPath);
+  next();
+};
+app.use(middlewareFunc);
 
 console.log('Hello World');
 
