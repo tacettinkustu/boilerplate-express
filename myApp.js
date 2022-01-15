@@ -1,8 +1,12 @@
 var express = require('express');
 var app = express();
 
-const staticFilesPath = __dirname + '/public';
-app.use(() => express.static(staticFilesPath));
+
+app.use(function (req, res, next) {
+    const staticFilesPath = __dirname + '/public';
+    express.static(staticFilesPath)
+    next();
+});
 
 console.log('Hello World');
 
