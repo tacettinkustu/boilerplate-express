@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
 
-app.use(express.static(__dirname + '/public'))
+const staticFilesPath = __dirname + '/public';
+app.use('/',express.static(staticFilesPath));
 
 console.log('Hello World');
 
@@ -10,8 +11,8 @@ console.log('Hello World');
 // });
 
 app.get('/', (req, res) => {
-    absolutePath = __dirname + '/views/index.html'
-    res.sendFile(absolutePath)
+  absolutePath = __dirname + '/views/index.html';
+  res.sendFile(absolutePath);
 });
 
 module.exports = app;
