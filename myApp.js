@@ -8,7 +8,8 @@ console.log('Hello World');
 // });
 
 app.get('/', (req, res) => {
-    res.sendFile('./views/index.html')
+    absolutePath = __dirname + './views/index.html'
+    res.sendFile(absolutePath)
 });
 
 module.exports = app;
