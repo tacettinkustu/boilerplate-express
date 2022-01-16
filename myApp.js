@@ -14,13 +14,22 @@ var app = express();
 //   absolutePath = __dirname + '/views/index.html';
 //   return res.sendFile(absolutePath);
 // });
-console.log(process.env.MESSAGE_STYLE)
-app.get('/json', (req, res) => {
-  if (process.env.MESSAGE_STYLE === 'uppercase') {
-    return res.json({ message: 'HELLO JSON' });
-  } else {
-    return res.json({ message: 'Hello json' });
-  }
+
+// app.get('/json', (req, res) => {
+//   if (process.env.MESSAGE_STYLE === 'uppercase') {
+//     return res.json({ message: 'HELLO JSON' });
+//   } else {
+//     return res.json({ message: 'Hello json' });
+//   }
+// });
+const logger = (req, res, next) => {
+  console.log(`${req.method} ${req.path} - ${req.ip}`)
+  next();
+};
+app.use(logger);
+
+app.get('/', (req, res) => {
+  res.send('Hello Express');
 });
 
 module.exports = app;
