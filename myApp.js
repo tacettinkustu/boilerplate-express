@@ -55,11 +55,8 @@ const app = express();
 //   res.json({ name: firstName + ' ' + lastName });
 // });
 
-app.use((req,res,next) => {
-  bodyParser.urlencoded({extended: false})
-  next()
-})
+app.use(bodyParser.urlencoded({ extended: false }));
 
-
+app.use(bodyParser.json());
 
 module.exports = app;
