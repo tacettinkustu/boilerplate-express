@@ -23,7 +23,7 @@ var app = express();
 //   }
 // });
 const logger = (req, res, next) => {
-  console.log(`${req.method} ${req.path} - ${req.ip}`)
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
   next();
 };
 app.use(logger);
@@ -31,5 +31,16 @@ app.use(logger);
 app.get('/', (req, res) => {
   res.send('Hello Express');
 });
+
+app.get(
+  '/now',
+  function (req, res, next) {
+    req.time = new Date().toString();
+    next();
+  },
+  function (req, res) {
+    res.json({ time: req.time });
+  }
+);
 
 module.exports = app;
