@@ -59,4 +59,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 
+app.post('/name', function (req, res) {
+  const firstName = req.body.first;
+  const lastName = req.body.last;
+  res.json({ name: firstName + ' ' + lastName });
+});
+
 module.exports = app;
