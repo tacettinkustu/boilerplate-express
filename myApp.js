@@ -1,14 +1,15 @@
 require('dotenv').config();
-var express = require('express');
-var app = express();
+const bodyParser = require('body-parser')
+const express = require('express');
+const app = express();
 
 // app.use('/public', express.static(__dirname + '/public'));
 
 // console.log('Hello World');
 
-// // app.get('/', (req, res) => {
-// //   res.send('Hello Express');
-// // });
+// app.get('/', (req, res) => {
+//   res.send('Hello Express');
+// });
 
 // app.get('/', (req, res) => {
 //   absolutePath = __dirname + '/views/index.html';
@@ -22,35 +23,43 @@ var app = express();
 //     return res.json({ message: 'Hello json' });
 //   }
 // });
-const logger = (req, res, next) => {
-  console.log(`${req.method} ${req.path} - ${req.ip}`);
-  next();
-};
-app.use(logger);
 
-app.get('/', (req, res) => {
-  res.send('Hello Express');
-});
+// const logger = (req, res, next) => {
+//   console.log(`${req.method} ${req.path} - ${req.ip}`);
+//   next();
+// };
+// app.use(logger);
 
-app.get(
-  '/now',
-  function (req, res, next) {
-    req.time = new Date().toString();
-    next();
-  },
-  function (req, res) {
-    res.json({ time: req.time });
-  }
-);
+// app.get('/', (req, res) => {
+//   res.send('Hello Express');
+// });
 
-app.get('/:word/echo', function (req, res) {
-  res.json({ echo: req.params.word });
-});
+// app.get(
+//   '/now',
+//   function (req, res, next) {
+//     req.time = new Date().toString();
+//     next();
+//   },
+//   function (req, res) {
+//     res.json({ time: req.time });
+//   }
+// );
 
-app.get('/name', function (req, res) {
-  const firstName = req.query.first;
-  const lastName = req.query.last;
-  res.json({ name: firstName + ' ' + lastName });
-});
+// app.get('/:word/echo', function (req, res) {
+//   res.json({ echo: req.params.word });
+// });
+
+// app.get('/name', function (req, res) {
+//   const firstName = req.query.first;
+//   const lastName = req.query.last;
+//   res.json({ name: firstName + ' ' + lastName });
+// });
+
+app.use((req,res,next) => {
+  bodyParser.urlencoded({extended: false})
+  next()
+})
+
+
 
 module.exports = app;
